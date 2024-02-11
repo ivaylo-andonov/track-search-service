@@ -1,0 +1,29 @@
+type Track {
+    id: ID!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+}
+
+extend type Track {
+    artistName: String!
+    name: String!
+    duration: Int!
+    isrc: String!
+    releaseDate: DateTime!
+}
+
+input CreateTrackInput {
+    artistName: String!
+    name: String!
+    duration: Int!
+    isrc: String!
+    releaseDate: DateTime!
+}
+
+input UpdateTrackInput {
+    artistName: String
+    name: String
+    duration: Int
+    isrc: String
+    releaseDate: DateTime
+}

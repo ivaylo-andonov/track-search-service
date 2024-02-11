@@ -1,0 +1,60 @@
+{
+  "name": "track-search-service",
+  "version": "1.0.0",
+  "description": "Track Search API",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest",
+    "clean": "rm -rf node_modules dist",
+    "start": "ENV=production node dist/index.js",
+    "dev": "ENV=development nodemon --watch 'src/**/*.ts' --exec 'ts-node' src/index.ts",
+    "lint:fix": "eslint \"{src,test}/**/*.ts\" --fix --cache --max-warnings=0",
+    "postbuild": "copyfiles -a -u 1 \"./src/**/*.graphql\" ./dist",
+    "db:start": "docker-compose -f docker-compose.db.yml up -d && yarn db:ready && yarn db:migrate && yarn db:seed",
+    "db:stop": "docker-compose -f docker-compose.db.yml down",
+    "db:ready": "npx wait-port localhost:5433",
+    "db:migrate": "prisma migrate dev",
+    "db:seed": "prisma db seed",
+    "db:studio": "prisma studio"
+  },
+  "keywords": [
+    "graphql",
+    "api",
+    "nodejs"
+  ],
+  "author": "Ivaylo Andonov",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.10.0",
+    "@prisma/client": "^5.9.1",
+    "axios": "^1.6.7",
+    "copyfiles": "^2.4.1",
+    "dotenv": "^16.4.1",
+    "graphql": "^16.8.1",
+    "graphql-import-node": "^0.0.5",
+    "graphql-scalars": "^1.22.4",
+    "jest": "^29.7.0",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.9.1",
+    "ts-log": "^2.2.5"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "^20.11.17",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.1.3",
+    "nodemon": "^3.0.3",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
+  },
+  "prisma": {
+    "schema": "src/db/schema.prisma",
+    "seed": "ts-node src/db/seed/index.ts"
+  }
+}

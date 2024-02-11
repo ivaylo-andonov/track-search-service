@@ -1,0 +1,4 @@
+type Mutation {
+  updateTrack(id: String!, track: UpdateTrackInput!): Track
+  deleteTrack(id: String!): String
+}

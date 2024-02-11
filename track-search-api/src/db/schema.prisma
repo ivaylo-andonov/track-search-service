@@ -1,0 +1,25 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    binaryTargets = ["native", "linux-arm64-openssl-1.1.x", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Track {
+    id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+    createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz()
+    updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz()
+    name        String
+    artistName  String   @map("artist_name")
+    duration    Int
+    isrc        String
+    releaseDate DateTime @map("release_date") @db.Timestamptz()
+    
+    @@index(fields: [name, artistName])
+}

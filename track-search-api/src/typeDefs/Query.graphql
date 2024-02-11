@@ -1,0 +1,10 @@
+type Query {
+  tracks: [Track]
+  trackById(id: ID!): Track
+  trackByName(input: TrackByNameInput!): Track
+}
+
+input TrackByNameInput {
+  name: String!
+  artistName: String!
+}
