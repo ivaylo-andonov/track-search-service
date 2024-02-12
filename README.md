@@ -1,5 +1,5 @@
 ### GraphQL API for track search service
-Expose a GraphQl schema with main queries and mutations related to music tracks data.  
+А GraphQl schema exposing queries and mutations that interact with music track data.  
 
 ---
 ## Technologies used
