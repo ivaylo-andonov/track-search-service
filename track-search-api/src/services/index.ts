@@ -3,6 +3,7 @@ import { Config } from '../config';
 import { HttpClient } from '../utils/httpClient';
 import { CreateTrackInput, UpdateTrackInput } from '../types';
 import { MetadataApiTrackResponse } from './types';
+import * as v from 'validator';
 
 export const trackServiceFactory = (
   db: PrismaClient,
@@ -14,6 +15,8 @@ export const trackServiceFactory = (
     return tracks;
   },
   trackById: async (id: string): Promise<Track> => {
+    if (!v.isUUID(id)) throwInvalidUuidError(id);
+
     const track = await db.track.findFirst({
       where: {
         id,
@@ -50,6 +53,7 @@ export const trackServiceFactory = (
     return await db.track.create({ data: track });
   },
   updateTrack: async (id: string, track: UpdateTrackInput): Promise<Track> => {
+    if (!v.isUUID(id)) throwInvalidUuidError(id);
     try {
       const updatedTrack = await db.track.update({
         where: {
@@ -63,6 +67,7 @@ export const trackServiceFactory = (
     }
   },
   deleteTrack: async (id: string): Promise<string> => {
+    if (!v.isUUID(id)) throwInvalidUuidError(id);
     try {
       const deletedId = (
         await db.track.delete({
@@ -104,6 +109,10 @@ export const trackServiceFactory = (
 
 const throwNotFoundError = (id: string) => {
   throw new Error(`The track with id ${id} was not found`);
+};
+
+const throwInvalidUuidError = (id: string) => {
+  throw new Error(`The track with id ${id} is not a valid UUID`);
 };
 
 export type TrackService = ReturnType<typeof trackServiceFactory>;

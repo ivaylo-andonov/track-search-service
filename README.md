@@ -27,8 +27,9 @@ Once you have the above installed, run the following commands from the root:
 
 Other useful commands:
 
-- Stop database and clean up `yarn db:stop`
-- Start Prisma studio `yarn db:studio`
+- Stop database and clean up: `yarn db:stop`
+- Start Prisma studio: `yarn db:studio`
+- Execute tests: `yarn test`
 
 ---
 ## Start the project in production
