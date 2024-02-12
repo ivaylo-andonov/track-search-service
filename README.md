@@ -1,4 +1,5 @@
-### GraphQL API for a track search service.
+### GraphQL API for track search service
+Expose a GraphQl schema with main queries and mutations related to music tracks data.  
 
 ---
 ## Technologies used
@@ -22,7 +23,7 @@ Once you have the above installed, run the following commands from the root:
 -  Install node modules: `yarn install`
 -  Start the database (run postgres docker container, run db migrations + db seed): `yarn db:start`
 -  Start dev server: `yarn dev`
--  Open browser tab with (http://localhost:4000/) (Studio Apollo GraphQl)
+-  Open browser tab with (http://localhost:4000/) (Apollo GraphQl Studio)
 
 
 Other useful commands:
@@ -43,9 +44,10 @@ ___
 You need to authenticate against the GraphQl API with a token, otherwise the schema can not be introspected in Studio.
 You need to provide a valid HTTP header when send requests like: ```Authorization : Bearer AUTH_TOKEN```
 
-Test auth token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UifQ.xuEv8qrfXu424LZk8bVgr9MQJUIrp1rHcPyZw_KSsds` 
+Test auth token: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiSm9obiBEb2UifQ.xuEv8qrfXu424LZk8bVgr9MQJUIrp1rHcPyZw_KSsds`
 
+For testing purposes only the `.env` file is committed to the repo, otherwise, it must be git ignored.
 ___
 ## External API
 
-https://docs.acrcloud.com/reference/metadata-api
+The project is powered by external Music Metadata API: https://docs.acrcloud.com/reference/metadata-api
